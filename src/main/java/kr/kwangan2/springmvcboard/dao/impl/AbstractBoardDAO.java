@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.kwangan2.springmvcboard.dao.BoardDAO;
 import kr.kwangan2.springmvcboard.domain.BoardVO;
+import kr.kwangan2.springmvcboard.domain.Criteria;
 
 public class AbstractBoardDAO implements BoardDAO {
 
@@ -14,15 +15,25 @@ public class AbstractBoardDAO implements BoardDAO {
 	}
 
 	@Override
-	public void insertBoardVO(BoardVO boardVO) {
+	public List<BoardVO> boardVOList(Criteria criteria) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void insertBoardVOSelectKey(BoardVO boardVO) {
+	public int boardVOListCount(Criteria criteria) {
 		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public int insertBoardVO(BoardVO boardVO) {
+		return 0;
+	}
 
+	@Override
+	public int insertBoardVOSelectKey(BoardVO boardVO) {
+		return 0;
 	}
 
 	@Override

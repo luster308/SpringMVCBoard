@@ -1,7 +1,6 @@
 package kr.kwangan2.springmvcboard.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.kwangan2.springmvcboard.domain.BoardVO;
+import kr.kwangan2.springmvcboard.domain.Criteria;
 import kr.kwangan2.springmvcboard.service.BoardService;
+import kr.kwangan2.springmvcboard.util.PageCalc;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -19,42 +20,57 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/board/*")
 @AllArgsConstructor
 public class BoardController {
-	
+
 	private BoardService boardService;
 	
+//	@GetMapping("/list")
+//	public String boardVOList(Model model) {
+//		model.addAttribute("boardVOList", boardService.boardVOList());
+//		return "boardList";
+//	}
+	
 	@GetMapping("/list")
-	public void boardVOList(Model model) {
-		log.info("list");
-		model.addAttribute(boardService.boardVOList());
+	public String boardVOList(Criteria criteria, Model model) {
+		model.addAttribute("boardVOList",boardService.boardVOList(criteria));
+		model.addAttribute("pageCalc", 
+				new PageCalc(criteria, boardService.boardVOListCount(criteria))
+				.calcPage());
+		return "boardList";
+	}
+	
+	@GetMapping("/boardInsert")
+	public String boardInsert() {
+		return "boardInsert";
+	}
+	
+	@PostMapping("/boardInsertProc")
+	public String boardInsertProc(BoardVO boardVO, RedirectAttributes redirectAttributes) {
+		if(boardService.insertBoardVO(boardVO) >0) {
+			redirectAttributes.addFlashAttribute("result", "success");
+		}
+		return "redirect:/";
+	}
+	
+	@GetMapping("/select")
+	public String selectBoardVO
+		(@RequestParam("bno") Long bno, Model model) {
+		model.addAttribute("boardVO", boardService.selectBoardVO(bno));
+		return "boardUpdate";
 	}
 
-	@GetMapping("/select")
-	public void selectBoardVO(@RequestParam("bno") long bno, Model model) {
-		
-		log.info("/select");
-		model.addAttribute("boardVO", boardService.selectBoardVO(bno));
-	}
-	
-	@PostMapping("/update")
+	@PostMapping("/updateProc")
 	public String updateBoardVO(BoardVO boardVO, RedirectAttributes rttr) {
-		if(boardService.updateBoardVO(boardVO) > 0) {
+		if (boardService.updateBoardVO(boardVO) > 0) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/board/list";
+		return "redirect:/";
 	}
-	
-	@PostMapping("/delete")
-	public String deleteBoardVO(@RequestParam("bno") long bno, RedirectAttributes rttr) {
-		if(boardService.deleteBoardVO(bno) > 0) {
-			rttr.addFlashAttribute("result", "sucess");
+	@GetMapping("/delete")
+	public String deleteBoardVO(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+		if (boardService.deleteBoardVO(bno) > 0) {
+			rttr.addFlashAttribute("result", "success");
 		}
-		return "redirect:/board/list";
+		return "redirect:/";
 	}
-	
-	
-	
-	
-	
-	
-	
-}		//class
+
+}	// class

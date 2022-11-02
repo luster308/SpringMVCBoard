@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kwangan2.springmvcboard.domain.BoardVO;
+import kr.kwangan2.springmvcboard.domain.Criteria;
 import kr.kwangan2.springmvcboard.mapper.BoardMapper;
 import lombok.Setter;
 
@@ -21,13 +22,23 @@ public class BoardDAOImpl extends AbstractBoardDAO {
 	}
 
 	@Override
-	public void insertBoardVO(BoardVO boardVO) {
-		mapper.insertBoardVO(boardVO);
+	public List<BoardVO> boardVOList(Criteria criteria) {
+		return mapper.boardVOList(criteria);
 	}
 
 	@Override
-	public void insertBoardVOSelectKey(BoardVO boardVO) {
-		mapper.insertBoardVOSelectKey(boardVO);
+	public int boardVOListCount(Criteria criteria) {
+		return mapper.boardVOListCount(criteria);
+	}
+	
+	@Override
+	public int insertBoardVO(BoardVO boardVO) {
+		return mapper.insertBoardVO(boardVO);
+	}
+
+	@Override
+	public int insertBoardVOSelectKey(BoardVO boardVO) {
+		return mapper.insertBoardVOSelectKey(boardVO);
 	}
 
 	@Override
