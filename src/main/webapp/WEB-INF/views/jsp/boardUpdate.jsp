@@ -4,10 +4,72 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../jsp/includes/header.jsp"%>
 
+<script src="/resources/js/reply.js"></script>
+<script>
+	// reply.js test
+	$(function() {
+		
+		var bnoValue = "<c:out value='${boardVO.bno}' />";
+		
+		// insert 테스트
+		/*
+		replyService.insertReplyVO(
+				{reply:"JS Test", replyer:"tester", bno:bnoValue},
+				function(result) {
+					alert("result: "+result);
+				}
+		);
+		*/
+		
+		// list 테스트
+		/*
+		replyService.listReplyVO(
+				{bno:bnoValue, page:1},
+				function(list) {
+					var listLength = list.length;
+					for (var i=0, len=listLength||0; i<len; i++) {
+						console.log(list[i]);
+					}
+				}
+		);
+		*/
+		
+		// delete 테스트
+		/*
+		replyService.deleteReplyVO(
+				9,
+				function(count) {
+					console.log(count);
+				}
+		);
+		*/
+		
+		// update 테스트
+		/*
+		replyService.updateReplyVO(
+			{rno:2, bno:bnoValue, reply:"수정된 댓글", replyer:"윤기영"},
+			function(result) {
+				alert(result);
+			}
+		);
+		*/
+		
+		// select 테스트
+		replyService.selectReplyVO(
+				11,
+				function(data) {
+					console.log(data);
+				}
+		);
+		
+		
+		
+	});
+</script>
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Board Register</h1>
+		<h1 class="page-header">Board Update</h1>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
@@ -17,7 +79,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 
-			<div class="panel-heading">Board Modify</div>
+			<div class="panel-heading">Board Update</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 
