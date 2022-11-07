@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.kwangan2.springmvcboard.domain.Criteria;
+import kr.kwangan2.springmvcboard.domain.ReplyPageDTO;
 import kr.kwangan2.springmvcboard.domain.ReplyVO;
 import kr.kwangan2.springmvcboard.service.ReplyService;
 import lombok.AllArgsConstructor;
@@ -51,14 +52,14 @@ public class ReplyController {
                   MediaType.APPLICATION_XML_VALUE
             }
          )
-         public ResponseEntity<List<ReplyVO>>listReplyVO(
+         public ResponseEntity<ReplyPageDTO>listReplyVO(
                      @PathVariable("bno") Long bno,
                      @PathVariable("page") int page
                ){
          Criteria criteria = new Criteria(page,10);
-         return new ResponseEntity<List<ReplyVO>>(
-               replyService.listReplyVO(criteria, bno),
-               HttpStatus.OK
+         return new ResponseEntity<ReplyPageDTO>(
+	               replyService.listReplyVO(criteria, bno),
+	               HttpStatus.OK
                );
       }  
       

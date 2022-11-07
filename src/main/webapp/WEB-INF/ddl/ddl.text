@@ -55,6 +55,8 @@ CREATE TABLE reply(
 
 /* 시퀀스 생성 */
 CREATE SEQUENCE seq_reply INCREMENT BY 1;
+/* 인덱스 생성 */
+CREATE INDEX idx_reply ON reply (bno DESC, rno asc);
 
 /* 키 지정 */
 ALTER TABLE reply ADD CONSTRAINT pk_reply 

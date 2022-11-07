@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kwangan2.springmvcboard.domain.Criteria;
+import kr.kwangan2.springmvcboard.domain.ReplyPageDTO;
 import kr.kwangan2.springmvcboard.domain.ReplyVO;
 
 public interface ReplyMapper {
@@ -14,7 +15,7 @@ public interface ReplyMapper {
 				@Param("bno") long bno
 			);
 	
-	public int replyVOListCount();
+	public int replyVOListCount(long bno);
 	
 	public ReplyVO selectReplyVO(long rno);
 	

@@ -8,8 +8,16 @@
 	<![CDATA[
 		select 
 			rno, bno, reply, replyer, replydate, updatedate 
-		from
-			reply
+		from (
+			select /*+INDEX(reply idx_reply)*/
+				rownum rn, rno, bno, reply, replyer, replydate, updatedate
+			from
+				reply
+			where bno = #{bno}
+				and rno > 0
+				and rownum <= #{criteria.pageNum} * #{criteria.amount}
+			)
+		where rn > (#{criteria.pageNum}-1) * #{criteria.amount}
 		]]>
 	</select>
 

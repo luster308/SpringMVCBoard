@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import kr.kwangan2.springmvcboard.domain.Criteria;
 import kr.kwangan2.springmvcboard.domain.ReplyVO;
 import kr.kwangan2.springmvcboard.service.ReplyService;
 import lombok.Setter;
@@ -70,7 +71,12 @@ public class ReplyMapperTests {
 //		replyService.deleteReplyVO(7);
 //	}
 	
-	
+//	@Test
+//	public void testList2() {
+//		Criteria criteria = new Criteria(1, 5);
+//		List<ReplyVO> replies = replyService.listReplyVO(criteria, 5);
+//		replies.forEach(reply -> log.info(replies));
+//	}
 	
 	
 	
